@@ -39,7 +39,7 @@ $(PKG_BUILD_DIR)/micro_ros_dev/install: $(PKG_BUILD_DIR)/colcon_venv
 		--cmake-args \
 		" -DBUILD_TESTING=OFF" \
 		" -DCMAKE_TOOLCHAIN_FILE=$(PKG_BUILD_DIR)/toolchain_host.cmake" \
-		2> $(PKG_BUILD_DIR)/devt_tools_errors.log
+		2> $(PKG_BUILD_DIR)/dev_tools_errors.log
 
 $(PKG_SOURCE_DIR)/micro_ros_src/src:
 	@rm -rf $(PKG_SOURCE_DIR)/micro_ros_src; \
