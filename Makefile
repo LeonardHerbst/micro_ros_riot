@@ -101,12 +101,12 @@ $(PKG_BUILD_DIR)/micro_ros/install: $(PKG_BUILD_DIR)/micro_ros_dev/install $(PKG
 $(BINDIR)/micro_ros.a: $(PKG_BUILD_DIR)/micro_ros/install
 	@mkdir -p $(PKG_BUILD_DIR)/micro_ros_o; cd $(PKG_BUILD_DIR)/micro_ros_o; \
 	for file in $$(find $(PKG_BUILD_DIR)/micro_ros/install/lib/ -name '*.a'); do \
-		@folder=$$(echo $$file | sed -E "s/(.+)\/(.+).a/\2/"); \
-		@mkdir -p $$folder; cd $$folder; $(AR) x $$file; \
-		@for f in *; do \
-			@mv $$f ../$$folder-$$f; \
-		@done; \
-		@cd ..; rm -rf $$folder; \
+		folder=$$(echo $$file | sed -E "s/(.+)\/(.+).a/\2/"); \
+		mkdir -p $$folder; cd $$folder; $(AR) x $$file; \
+		for f in *; do \
+			mv $$f ../$$folder-$$f; \
+		done; \
+		cd ..; rm -rf $$folder; \
 	done ; \
 	$(AR)  rc micro_ros.a *.obj; cp micro_ros.a $(BINDIR); ${RANLIB} $(BINDIR)/micro_ros.a; \
 	cd ..; rm -rf micro_ros_o; \
