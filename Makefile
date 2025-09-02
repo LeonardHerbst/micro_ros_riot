@@ -9,7 +9,7 @@ clean:
 
 $(PKG_BUILD_DIR)/colcon_venv:
 	@python3 -m venv $(PKG_BUILD_DIR)/colcon_venv; \
-	@$(PKG_BUILD_DIR)/colcon_venv/bin/pip install -U colcon-common-extensions lark;
+	$(PKG_BUILD_DIR)/colcon_venv/bin/pip install -U colcon-common-extensions lark;
 
 $(PKG_BUILD_DIR)/configured_colcon.meta:
 	@cp -f $(PKG_SOURCE_DIR)/colcon.meta $(PKG_BUILD_DIR)/configured_colcon.meta; \
