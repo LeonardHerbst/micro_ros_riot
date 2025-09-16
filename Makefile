@@ -13,13 +13,15 @@ $(PKG_BUILD_DIR)/colcon_venv:
 
 $(PKG_BUILD_DIR)/configured_colcon.meta:
 	@cp -f $(PKG_SOURCE_DIR)/colcon.meta $(PKG_BUILD_DIR)/configured_colcon.meta; \
-	. $(PKG_SOURCE_DIR)/kconfig_vars; \
-	sed -i 's/\(RMW_UXRCE_MAX_NODES=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_NODES"'/g' $@; \
-	sed -i 's/\(RMW_UXRCE_MAX_SUBSCRIPTIONS=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_SUBSCRIPTIONS"'/g' $@; \
-	sed -i 's/\(RMW_UXRCE_MAX_PUBLISHERS=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_PUBLISHERS"'/g' $@; \
-	sed -i 's/\(RMW_UXRCE_MAX_HISTORY=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_HISTORY"'/g' $@; \
-	sed -i 's/\(RMW_UXRCE_MAX_SERVICES=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_SERVICES"'/g' $@; \
-	sed -i 's/\(RMW_UXRCE_MAX_CLIENTS=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_CLIENTS"'/g' $@;
+	if [ -f $(PKG_SOURCE_DIR)/kconfig_vars ]; then \
+		. $(PKG_SOURCE_DIR)/kconfig_vars; \
+		sed -i 's/\(RMW_UXRCE_MAX_NODES=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_NODES"'/g' $@; \
+		sed -i 's/\(RMW_UXRCE_MAX_SUBSCRIPTIONS=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_SUBSCRIPTIONS"'/g' $@; \
+		sed -i 's/\(RMW_UXRCE_MAX_PUBLISHERS=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_PUBLISHERS"'/g' $@; \
+		sed -i 's/\(RMW_UXRCE_MAX_HISTORY=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_HISTORY"'/g' $@; \
+		sed -i 's/\(RMW_UXRCE_MAX_SERVICES=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_SERVICES"'/g' $@; \
+		sed -i 's/\(RMW_UXRCE_MAX_CLIENTS=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_CLIENTS"'/g' $@; \
+	fi
 
 $(PKG_BUILD_DIR)/micro_ros_dev/install: $(PKG_BUILD_DIR)/colcon_venv
 	@rm -rf $(PKG_SOURCE_DIR)/micro_ros_dev; \
