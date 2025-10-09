@@ -34,6 +34,7 @@ $(PKG_BUILD_DIR)/micro_ros_dev/install: $(PKG_BUILD_DIR)/colcon_venv
 	git clone -b kilted https://github.com/ros2/ament_cmake_ros src/ament_cmake_ros; \
 	git clone -b kilted https://github.com/ament/ament_index src/ament_index; \
 	touch src/ament_cmake_ros/rmw_test_fixture_implementation/COLCON_IGNORE; \
+	touch src/ament_cmake_ros/rmw_test_fixture/COLCON_IGNORE; \
   	. $(PKG_BUILD_DIR)/colcon_venv/bin/activate; \
 	colcon build \
 		--build-base $(PKG_BUILD_DIR)/micro_ros_dev/build \
