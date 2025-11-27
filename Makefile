@@ -21,6 +21,9 @@ $(PKG_BUILD_DIR)/configured_colcon.meta:
 		sed -i 's/\(RMW_UXRCE_MAX_HISTORY=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_HISTORY"'/g' $@; \
 		sed -i 's/\(RMW_UXRCE_MAX_SERVICES=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_SERVICES"'/g' $@; \
 		sed -i 's/\(RMW_UXRCE_MAX_CLIENTS=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_CLIENTS"'/g' $@; \
+		sed -i 's/\(RMW_UXRCE_MAX_HISTORY=\)[0-9]*/\1'"$$MICRO_ROS_MAX_HISTORY"'/g' $@; \
+		sed -i 's/\(RMW_UXRCE_STREAM_HISTORY_INPUT=\)[0-9]*/\1'"$$MICRO_ROS_STREAM_HISTORY_INPUT"'/g' $@; \
+		sed -i 's/\(RMW_UXRCE_STREAM_HISTORY_OUTPUT=\)[0-9]*/\1'"$$MICRO_ROS_STREAM_HISTORY_OUTPUT"'/g' $@; \
 	fi
 
 $(PKG_BUILD_DIR)/micro_ros_dev/install: $(PKG_BUILD_DIR)/colcon_venv
@@ -35,7 +38,7 @@ $(PKG_BUILD_DIR)/micro_ros_dev/install: $(PKG_BUILD_DIR)/colcon_venv
 	git clone -b kilted https://github.com/ament/ament_index src/ament_index; \
 	touch src/ament_cmake_ros/rmw_test_fixture_implementation/COLCON_IGNORE; \
 	touch src/ament_cmake_ros/rmw_test_fixture/COLCON_IGNORE; \
-  	. $(PKG_BUILD_DIR)/colcon_venv/bin/activate; \
+	. $(PKG_BUILD_DIR)/colcon_venv/bin/activate; \
 	colcon build \
 		--build-base $(PKG_BUILD_DIR)/micro_ros_dev/build \
 		--install-base $(PKG_BUILD_DIR)/micro_ros_dev/install \
@@ -71,18 +74,18 @@ $(PKG_SOURCE_DIR)/micro_ros_src/src:
 	git clone -b kilted https://github.com/ros2/rosidl_core src/rosidl_core; \
 	touch src/ros2_tracing/test_tracetools/COLCON_IGNORE; \
 	touch src/ros2_tracing/lttngpy/COLCON_IGNORE; \
-    touch src/rosidl/rosidl_typesupport_introspection_cpp/COLCON_IGNORE; \
-    touch src/rclc/rclc_examples/COLCON_IGNORE; \
-    touch src/common_interfaces/actionlib_msgs/COLCON_IGNORE; \
+	touch src/rosidl/rosidl_typesupport_introspection_cpp/COLCON_IGNORE; \
+	touch src/rclc/rclc_examples/COLCON_IGNORE; \
+	touch src/common_interfaces/actionlib_msgs/COLCON_IGNORE; \
 	touch src/common_interfaces/std_srvs/COLCON_IGNORE; \
 	touch src/rcl/rcl_yaml_param_parser/COLCON_IGNORE; \
-    touch src/rcl_logging/rcl_logging_spdlog/COLCON_IGNORE; \
-    touch src/rcl_interfaces/test_msgs/COLCON_IGNORE; \
+	touch src/rcl_logging/rcl_logging_spdlog/COLCON_IGNORE; \
+	touch src/rcl_interfaces/test_msgs/COLCON_IGNORE; \
 	touch src/rmw/rmw_security_common/COLCON_IGNORE;
 
 $(PKG_BUILD_DIR)/micro_ros/install: $(PKG_BUILD_DIR)/micro_ros_dev/install $(PKG_SOURCE_DIR)/micro_ros_src/src $(PKG_BUILD_DIR)/configured_colcon.meta
 	@cd $(PKG_SOURCE_DIR)/micro_ros_src; \
-  	. $(PKG_BUILD_DIR)/colcon_venv/bin/activate; \
+	. $(PKG_BUILD_DIR)/colcon_venv/bin/activate; \
 	. $(PKG_BUILD_DIR)/micro_ros_dev/install/local_setup.sh; \
 	colcon build \
 		--build-base $(PKG_BUILD_DIR)/micro_ros/build \
