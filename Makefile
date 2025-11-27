@@ -21,9 +21,8 @@ $(PKG_BUILD_DIR)/configured_colcon.meta:
 		sed -i 's/\(RMW_UXRCE_MAX_HISTORY=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_HISTORY"'/g' $@; \
 		sed -i 's/\(RMW_UXRCE_MAX_SERVICES=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_SERVICES"'/g' $@; \
 		sed -i 's/\(RMW_UXRCE_MAX_CLIENTS=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_MAX_CLIENTS"'/g' $@; \
-		sed -i 's/\(RMW_UXRCE_MAX_HISTORY=\)[0-9]*/\1'"$$MICRO_ROS_MAX_HISTORY"'/g' $@; \
-		sed -i 's/\(RMW_UXRCE_STREAM_HISTORY_INPUT=\)[0-9]*/\1'"$$MICRO_ROS_STREAM_HISTORY_INPUT"'/g' $@; \
-		sed -i 's/\(RMW_UXRCE_STREAM_HISTORY_OUTPUT=\)[0-9]*/\1'"$$MICRO_ROS_STREAM_HISTORY_OUTPUT"'/g' $@; \
+		sed -i 's/\(RMW_UXRCE_STREAM_HISTORY_INPUT=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_STREAM_HISTORY_INPUT"'/g' $@; \
+		sed -i 's/\(RMW_UXRCE_STREAM_HISTORY_OUTPUT=\)[0-9]*/\1'"$$CONFIG_MICRO_ROS_STREAM_HISTORY_OUTPUT"'/g' $@; \
 	fi
 
 $(PKG_BUILD_DIR)/micro_ros_dev/install: $(PKG_BUILD_DIR)/colcon_venv
